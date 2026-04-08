@@ -1,5 +1,6 @@
+import { createPostWatcher } from '../core/postWatcher';
 import type { TransportLike } from '../core/transport';
-import type { AvatarUrlInput, CommentCreateInput, ConversationCreateInput, MessageCreateInput, PaginationParams, PostCreateInput, PostRepostInput, PostVoteInput, QueryParams } from '../types';
+import type { AvatarUrlInput, CommentCreateInput, ConversationCreateInput, MessageCreateInput, PaginationParams, PostCreateInput, PostRepostInput, PostVoteInput, PostWatcherOptions, QueryParams } from '../types';
 
 export function createContentApi(transport: TransportLike) {
   return {
@@ -16,6 +17,7 @@ export function createContentApi(transport: TransportLike) {
         delete: <T = unknown>(postId: string, commentId: string) => transport.delete<T>(`/api/posts/${encodeURIComponent(postId)}/comments`, { body: { commentId } }),
       },
     },
+      watch: (options?: PostWatcherOptions) => createPostWatcher(transport, options),
     conversations: {
       list: <T = unknown>() => transport.get<T>('/api/conversations'),
       create: <T = unknown>(input: ConversationCreateInput) => transport.post<T>('/api/conversations', input),

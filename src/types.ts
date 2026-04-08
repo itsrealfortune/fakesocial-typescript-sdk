@@ -146,6 +146,19 @@ export interface MessageCreateInput {
   [key: string]: unknown;
 }
 
+export interface PostItem {
+  _id?: string;
+  id?: string;
+  [key: string]: unknown;
+}
+
+export interface PostWatcherOptions {
+  query?: QueryParams;
+  limit?: number;
+  intervalMs?: number;
+  initialFetch?: boolean;
+}
+
 export interface AvatarUrlInput extends QueryParams {
   userId?: string;
   username?: string;
