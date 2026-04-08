@@ -2,7 +2,7 @@
   "name": "fakesocial-typescript-sdk",
   "module": "index.ts",
   "type": "module",
-  "private": true,
+  "version": "0.1.0",
   "scripts": {
     "check": "npx tsc --noEmit",
     "test": "bun test tests",
