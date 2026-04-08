@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, expect, it } from "bun:test";
 import { ForgotPasswordAction } from "../../src";
 import { AuthRoute } from "../../src/constants/routes";
+import type { TransportLike } from "../../src/core/transport";
 import { createAuthApi } from "../../src/modules/auth";
 
 const makeTransport = () => {
@@ -39,7 +41,7 @@ const makeTransport = () => {
 describe("createAuthApi", () => {
   it("calls the proper auth routes", async () => {
     const { transport, calls } = makeTransport();
-    const api = createAuthApi(transport as any);
+    const api = createAuthApi(transport as TransportLike);
 
     await api.login({ username: "test", password: "pwd" });
     await api.signup({
@@ -73,7 +75,7 @@ describe("createAuthApi", () => {
 
   it("uses passkey route enums", async () => {
     const { transport, calls } = makeTransport();
-    const api = createAuthApi(transport as any);
+    const api = createAuthApi(transport as TransportLike);
 
     await api.passkeyAuthOptions({});
     await api.passkeyAuthVerify({});

@@ -7,16 +7,16 @@ const makeTransport = (responses: PostItem[][]): TransportLike => {
   let call = 0;
   return {
     buildUrl: () => "",
-    delete: async () => ({}) as unknown as any,
+    delete: async () => ({}),
     get: async () => {
       const response = responses[call] ?? [];
       call += 1;
-      return response as unknown as any;
+      return response;
     },
-    patch: async () => ({}) as unknown as any,
-    post: async () => ({}) as unknown as any,
-    put: async () => ({}) as unknown as any,
-    request: async () => ({}) as unknown as any,
+    patch: async () => ({}),
+    post: async () => ({}),
+    put: async () => ({}),
+    request: async () => ({}),
     setToken: () => {},
   } as unknown as TransportLike;
 };

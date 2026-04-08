@@ -21,6 +21,5 @@ export enum OAuthRoute {
   Revoke = "/api/oauth/revoke",
   Me = "/api/oauth/me",
   Applications = "/api/oauth/applications",
-  ApplicationById = "/api/oauth/applications",
   Authorize = "/api/oauth/authorize",
 }

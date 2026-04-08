@@ -22,12 +22,12 @@ export function createOAuthApi(transport: TransportLike) {
         transport.post<T>(OAuthRoute.Applications, input),
       update: <T = unknown>(clientId: string, input: OAuthApplicationInput) =>
         transport.put<T>(
-          `${OAuthRoute.ApplicationById}/${encodeURIComponent(clientId)}`,
+          `${OAuthRoute.Applications}/${encodeURIComponent(clientId)}`,
           input,
         ),
       delete: <T = unknown>(clientId: string) =>
         transport.delete<T>(
-          `${OAuthRoute.ApplicationById}/${encodeURIComponent(clientId)}`,
+          `${OAuthRoute.Applications}/${encodeURIComponent(clientId)}`,
         ),
     },
   };

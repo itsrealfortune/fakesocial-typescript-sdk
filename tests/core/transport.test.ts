@@ -1,16 +1,11 @@
 import { describe, expect, it } from "bun:test";
 import { createTransport } from "../../src/core/transport";
+import { isFakeMediaApiError } from "../../src/errors";
 
 const jsonResponse = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json" },
-  });
-
-const textResponse = (text: string, status = 200) =>
-  new Response(text, {
-    status,
-    headers: { "content-type": "text/plain" },
   });
 
 describe("createTransport", () => {
@@ -83,10 +78,14 @@ describe("createTransport", () => {
     try {
       await transport.get("/api/posts");
       throw new Error("Expected transport.get to throw");
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect((error as any).status).toBe(400);
-      expect((error as any).payload).toEqual({ error: "Bad request" });
+    } catch (error: unknown) {
+      expect(isFakeMediaApiError(error)).toBe(true);
+      if (!isFakeMediaApiError(error)) {
+        throw error;
+      }
+
+      expect(error.status).toBe(400);
+      expect(error.payload).toEqual({ error: "Bad request" });
     }
   });
 });
