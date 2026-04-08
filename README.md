@@ -1,4 +1,4 @@
-# fakesocial-typescript-sdk
+# fakesocial.ts
 
 SDK TypeScript pour FakeMedia.
 
@@ -17,7 +17,7 @@ bun run check
 ## Utilisation
 
 ```ts
-import { createFakeMediaClient } from "fakesocial-typescript-sdk";
+import { createFakeMediaClient } from "fakesocial.ts";
 
 const client = createFakeMediaClient({
   baseUrl: "https://fakesocial.fr",
@@ -33,7 +33,7 @@ const posts = await client.posts.list({ limit: 20 });
 The SDK can also be used to instantiate a simple FakeMedia bot that acts as a user session and listens for new posts.
 
 ```ts
-import { createFakeMediaClient } from "fakesocial-typescript-sdk";
+import { createFakeMediaClient } from "fakesocial.ts";
 
 const bot = createFakeMediaClient({
   baseUrl: "https://fakesocial.fr",
