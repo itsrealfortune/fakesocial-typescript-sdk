@@ -1,5 +1,6 @@
 import { FakeMediaApiError } from '../errors';
-import type { ApiErrorPayload, ClientOptions, HttpMethod, QueryParams, RequestOptions } from '../types';
+import type { ApiErrorPayload, ClientOptions, QueryParams, RequestOptions } from '../types';
+import { HttpMethod } from '../types';
 
 export interface TransportLike {
   buildUrl(path: string, query?: QueryParams): string;
@@ -207,14 +208,14 @@ export function createTransport(options: ClientOptions = {}): TransportLike {
 
     request,
 
-    get: <T = unknown>(path: string, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>('GET', path, requestOptions),
+    get: <T = unknown>(path: string, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>(HttpMethod.GET, path, requestOptions),
 
-    post: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>('POST', path, { ...requestOptions, body }),
+    post: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>(HttpMethod.POST, path, { ...requestOptions, body }),
 
-    put: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>('PUT', path, { ...requestOptions, body }),
+    put: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>(HttpMethod.PUT, path, { ...requestOptions, body }),
 
-    patch: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>('PATCH', path, { ...requestOptions, body }),
+    patch: <T = unknown>(path: string, body?: unknown, requestOptions: Omit<RequestOptions, 'body'> = {}): Promise<T> => request<T>(HttpMethod.PATCH, path, { ...requestOptions, body }),
 
-    delete: <T = unknown>(path: string, requestOptions: RequestOptions = {}): Promise<T> => request<T>('DELETE', path, requestOptions),
+    delete: <T = unknown>(path: string, requestOptions: RequestOptions = {}): Promise<T> => request<T>(HttpMethod.DELETE, path, requestOptions),
   };
 }
