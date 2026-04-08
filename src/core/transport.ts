@@ -125,8 +125,8 @@ function buildUrl(baseUrl: string, path: string, query?: QueryParams): string {
   }
 
   const url = new URL(
-    joinPath(baseUrl || "http://fake-media-sdk.local", path),
-    "http://fake-media-sdk.local",
+    joinPath(baseUrl || "https://fakesocial.fr", path),
+    "https://fakesocial.fr",
   );
   appendQuery(url, query);
   return `${url.pathname}${url.search}`;
