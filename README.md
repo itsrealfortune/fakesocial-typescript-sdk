@@ -1,11 +1,30 @@
-# fakesocial-ts
+<p align="center">
+  <img src="./assets/banner.png" alt="FakeSocial Banner" />
+</p>
 
-SDK TypeScript pour FakeMedia.
+<p align="center">
+  <a href="https://www.npmjs.com/package/fakesocial-typescript-sdk">
+    <img src="https://img.shields.io/npm/v/fakesocial-typescript-sdk?color=blue&label=npm" />
+  </a>
+  <a href="https://www.npmjs.com/package/fakesocial-typescript-sdk">
+    <img src="https://img.shields.io/npm/dw/fakesocial-typescript-sdk?color=green&label=downloads" />
+  </a>
+  <img src="https://img.shields.io/github/license/FakeSocial/fakesocial-typescript-sdk" />
+  <img src="https://img.shields.io/github/stars/FakeSocial/fakesocial-typescript-sdk?style=social" />
+</p>
+
+<h1 align="center">FakeSocial TypeScript SDK</h1>
+
+<p align="center">
+  Official SDK for interact with the FakeSocial API
+</p>
 
 ## Installation
 
 ```bash
-bun install
+npm install fakesocial-typescript-sdk
+
+bun add fakesocial-typescript-sdk
 ```
 
 ## Vérification
