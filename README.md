@@ -12,8 +12,8 @@
   <a href="https://www.npmjs.com/package/fakesocial-ts">
     <img src="https://img.shields.io/npm/dw/fakesocial-ts?color=57F287&label=downloads&logo=npm" />
   </a>
-  <img src="https://img.shields.io/github/license/FakeSocial/fakesocial-ts?color=ed4245" />
-  <img src="https://img.shields.io/github/stars/FakeSocial/fakesocial-ts?style=for-the-badge" />
+  <img src="https://img.shields.io/github/license/FakeSocial/fakesocial-typescript-sdk?color=ed4245" />
+  <img src="https://img.shields.io/github/stars/FakeSocial/fakesocial-typescript-sdk?style=for-the-badge" />
 </p>
 
 <p align="center">
