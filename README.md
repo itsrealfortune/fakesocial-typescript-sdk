@@ -31,7 +31,7 @@
 Built with performance and developer experience in mind, it provides a clean and modular interface for building apps, bots and integrations.
 
 <p align="center">
-  Special thanks to <a href="https://github.com/itsrealfortune">@itsrealfortune</a> for being the official creator of FakeSocial SDK 💜
+  Special thanks to <a href="https://github.com/itsrealfortune"><b>@itsrealfortune</b></a> for being the official creator of FakeSocial SDK 💜
 </p>
 
 ## Installation
