@@ -17,11 +17,11 @@
 </p>
 
 <p align="center">
-  <a href="#installation">Installation</a> •
-  <a href="#quick-example">Quick Example</a> •
-  <a href="#features">Features</a> •
-  <a href="#architecture">Architecture</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#installation">#Installation</a> •
+  <a href="#quick-example">#Quick Example</a> •
+  <a href="#features">#Features</a> •
+  <a href="#architecture">#Architecture</a> •
+  <a href="#contributing">#Contributing</a>
 </p>
 
 ## About
