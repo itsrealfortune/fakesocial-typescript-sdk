@@ -2,11 +2,12 @@
   "name": "fakesocial-ts",
   "module": "index.ts",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "scripts": {
     "check": "npx tsc --noEmit",
     "test": "bun test tests",
     "format": "npx prettier --write .",
+    "build": "npx tsc --project tsconfig.json",
     "lint": "npx eslint . --ext .ts"
   },
   "devDependencies": {
@@ -19,5 +20,8 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "undici": "^8.1.0"
   }
 }

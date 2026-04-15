@@ -1,3 +1,6 @@
+import type { HeadersInit } from "bun";
+import type { RequestCredentials } from "undici";
+
 export enum HttpMethod {
   GET = "GET",
   POST = "POST",

@@ -1,3 +1,4 @@
+import type { BodyInit, HeadersInit } from "bun";
 import { FakeMediaApiError } from "../errors";
 import type {
   ApiErrorPayload,
