@@ -3,6 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "version": "0.9.9",
+  "repository": {
+    "url": "https://github.com/FakeSocial/fakesocial-typescript-sdk"
+  },
   "scripts": {
     "check": "npx tsc --noEmit",
     "test": "bun test tests",
