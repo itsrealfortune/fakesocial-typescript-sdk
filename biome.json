@@ -13,7 +13,7 @@
             },
             "style": {
                 "noShoutyConstants": "warn",
-                "useNamingConvention": "error",
+                "useNamingConvention": "off",
                 "noNonNullAssertion": "off"
             }
         }
