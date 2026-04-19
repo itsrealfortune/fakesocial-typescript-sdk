@@ -95,7 +95,7 @@ jobs:
     needs:
       - typecheck
       - lint
-      # - tests
+      - tests
     runs-on: ubuntu-latest
     steps:
       - name: Test battery passed
