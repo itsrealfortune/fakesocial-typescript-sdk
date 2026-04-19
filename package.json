@@ -2,23 +2,35 @@
   "name": "fakesocial-ts",
   "module": "index.ts",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.9.9",
+  "repository": {
+    "url": "https://github.com/FakeSocial/fakesocial-typescript-sdk"
+  },
   "scripts": {
-    "check": "npx tsc --noEmit",
-    "test": "bun test tests",
-    "format": "npx prettier --write .",
-    "lint": "npx eslint . --ext .ts"
+    "build:watch": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "example": "ts-node --esm examples/example.ts",
+    "format": "bunx --bun @biomejs/biome format --write ./src",
+    "check": "bunx --bun @biomejs/biome check ./src",
+    "lint": "bunx --bun @biomejs/biome lint ./src",
+    "lint:write": "bunx --bun @biomejs/biome lint --write ./src",
+    "test": "bunx --bun @biomejs/biome test ./src",
+    "build": "tsc --project tsconfig.json",
+    "deploy:npm": "npm publish --access public",
+    "publish-package": "bash ./scripts/publish-package.sh"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/bun": "latest",
-    "eslint": "^10.2.0",
-    "globals": "^17.4.0",
-    "jiti": "^2.6.1",
-    "typescript-eslint": "^8.58.1"
+    "@biomejs/biome": "^2.4.12",
+    "@types/bun": "^1.3.12",
+    "@types/node": "^25.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "undici": "^8.1.0"
   },
   "license": "Apache-2.0"
 }
