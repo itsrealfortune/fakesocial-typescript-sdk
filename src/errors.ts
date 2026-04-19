@@ -14,28 +14,28 @@ import type { ApiErrorPayload } from "./types";
  * );
  */
 export class FakeMediaApiError extends Error {
-  readonly status: number;
-  readonly payload?: ApiErrorPayload;
-  readonly url?: string;
-  readonly method?: string;
+	readonly status: number;
+	readonly payload?: ApiErrorPayload;
+	readonly url?: string;
+	readonly method?: string;
 
-  /**
-   * @param message - The error message returned by the API or generated locally.
-   * @param status - HTTP status code associated with the failure.
-   * @param options - Optional metadata describing the request context.
-   */
-  constructor(
-    message: string,
-    status: number,
-    options?: { payload?: ApiErrorPayload; url?: string; method?: string },
-  ) {
-    super(message);
-    this.name = "FakeMediaApiError";
-    this.status = status;
-    this.payload = options?.payload;
-    this.url = options?.url;
-    this.method = options?.method;
-  }
+	/**
+	 * @param message - The error message returned by the API or generated locally.
+	 * @param status - HTTP status code associated with the failure.
+	 * @param options - Optional metadata describing the request context.
+	 */
+	constructor(
+		message: string,
+		status: number,
+		options?: { payload?: ApiErrorPayload; url?: string; method?: string },
+	) {
+		super(message);
+		this.name = "FakeMediaApiError";
+		this.status = status;
+		this.payload = options?.payload;
+		this.url = options?.url;
+		this.method = options?.method;
+	}
 }
 
 /**
@@ -50,7 +50,7 @@ export class FakeMediaApiError extends Error {
  * }
  */
 export function isFakeMediaApiError(
-  error: unknown,
+	error: unknown,
 ): error is FakeMediaApiError {
-  return error instanceof Error && error.name === "FakeMediaApiError";
+	return error instanceof Error && error.name === "FakeMediaApiError";
 }
