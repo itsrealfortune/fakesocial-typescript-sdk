@@ -10,13 +10,39 @@ import type {
 	TotpVerifyInput,
 } from "../types";
 
+export interface AuthApiInterface {
+	login: <T = unknown>(input: AuthLoginInput) => Promise<T>;
+	signup: <T = unknown>(input: AuthSignupInput) => Promise<T>;
+	logout: <T = unknown>() => Promise<T>;
+	forgotPassword: <T = unknown>(input: ForgotPasswordInput) => Promise<T>;
+	resetPassword: <T = unknown>(input: ResetPasswordInput) => Promise<T>;
+	verifyEmail: <T = unknown>(input: Record<string, unknown>) => Promise<T>;
+	totpSetup: <T = unknown>(input: TotpSetupInput) => Promise<T>;
+	totpVerify: <T = unknown>(input: TotpVerifyInput) => Promise<T>;
+	totpDisable: <T = unknown>(input: TotpDisableInput) => Promise<T>;
+	passkeyAuthOptions: <T = unknown>(
+		input: Record<string, unknown>,
+	) => Promise<T>;
+	passkeyAuthVerify: <T = unknown>(
+		input: Record<string, unknown>,
+	) => Promise<T>;
+	passkeyRegisterOptions: <T = unknown>(
+		input: Record<string, unknown>,
+	) => Promise<T>;
+	passkeyRegisterVerify: <T = unknown>(
+		input: Record<string, unknown>,
+	) => Promise<T>;
+	passkeyList: <T = unknown>() => Promise<T>;
+	passkeyRemove: <T = unknown>(input: Record<string, unknown>) => Promise<T>;
+}
+
 /**
  * Builds the authentication API helper object.
  *
  * @param transport - Transport instance used to issue auth requests.
  * @returns Authentication helper methods.
  */
-export function createAuthApi(transport: TransportLike) {
+export function createAuthApi(transport: TransportLike): AuthApiInterface {
 	return {
 		/**
 		 * Signs in a user with username and password.

@@ -6,13 +6,29 @@ import type {
 	OAuthTokenInput,
 } from "../types";
 
+export interface OAuthApiInterface {
+	token: <T = unknown>(input: OAuthTokenInput) => Promise<T>;
+	revoke: <T = unknown>(input: Record<string, unknown>) => Promise<T>;
+	me: <T = unknown>(accessToken?: string) => Promise<T>;
+	buildAuthorizeUrl: (input: OAuthAuthorizeInput) => string;
+	applications: {
+		list: <T = unknown>() => Promise<T>;
+		create: <T = unknown>(input: OAuthApplicationInput) => Promise<T>;
+		update: <T = unknown>(
+			clientId: string,
+			input: OAuthApplicationInput,
+		) => Promise<T>;
+		delete: <T = unknown>(clientId: string) => Promise<T>;
+	};
+}
+
 /**
  * Builds the OAuth API helpers for the Fake Social SDK.
  *
  * @param transport - Transport instance used for OAuth requests.
  * @returns OAuth helper methods.
  */
-export function createOAuthApi(transport: TransportLike) {
+export function createOAuthApi(transport: TransportLike): OAuthApiInterface {
 	return {
 		/**
 		 * Exchanges an authorization code for an access token.

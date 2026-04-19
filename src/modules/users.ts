@@ -1,13 +1,38 @@
 import type { TransportLike } from "../core/transport";
 import type { QueryParams, UserUpdateInput } from "../types";
 
+export interface UsersMeApiInterface {
+	get: <T = unknown>() => Promise<T>;
+	update: <T = unknown>(input: UserUpdateInput) => Promise<T>;
+	delete: <T = unknown>(input: Record<string, unknown>) => Promise<T>;
+	disable: <T = unknown>() => Promise<T>;
+	export: <T = unknown>() => Promise<T>;
+}
+
+export interface UsersApiInterface {
+	list: <T = unknown>(query?: QueryParams) => Promise<T>;
+	follow: <T = unknown>(userId: string) => Promise<T>;
+	block: <T = unknown>(userId: string) => Promise<T>;
+	following: <T = unknown>(userId: string, query?: QueryParams) => Promise<T>;
+	followRequests: <T = unknown>(userId: string) => Promise<T>;
+	acceptFollowRequest: <T = unknown>(
+		userId: string,
+		requesterId: string,
+	) => Promise<T>;
+	rejectFollowRequest: <T = unknown>(
+		userId: string,
+		requesterId: string,
+	) => Promise<T>;
+	me: UsersMeApiInterface;
+}
+
 /**
  * Builds the user API helper object.
  *
  * @param transport - Transport instance used for user requests.
  * @returns User helper methods.
  */
-export function createUsersApi(transport: TransportLike) {
+export function createUsersApi(transport: TransportLike): UsersApiInterface {
 	return {
 		/**
 		 * Lists users with optional query filters.

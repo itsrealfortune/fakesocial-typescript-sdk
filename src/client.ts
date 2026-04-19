@@ -1,8 +1,23 @@
 import { createTransport } from "./core/transport";
+import type { AuthApiInterface } from "./modules/auth";
 import { createAuthApi } from "./modules/auth";
+import type {
+	AchievementsApiInterface,
+	ConversationsApiInterface,
+	NotificationsApiInterface,
+	PlatformApiInterface,
+	PostsApiInterface,
+} from "./modules/content";
 import { createContentApi } from "./modules/content";
+import type {
+	ModerationAdminApiInterface,
+	ModerationAppealsApiInterface,
+	ModerationReportsApiInterface,
+} from "./modules/moderation";
 import { createModerationApi } from "./modules/moderation";
+import type { OAuthApiInterface } from "./modules/oauth";
 import { createOAuthApi } from "./modules/oauth";
+import type { UsersApiInterface, UsersMeApiInterface } from "./modules/users";
 import { createUsersApi } from "./modules/users";
 import type { ClientOptions, QueryParams } from "./types";
 
@@ -13,18 +28,18 @@ import type { ClientOptions, QueryParams } from "./types";
  * through strongly typed helper objects.
  */
 export class FakeMediaClient {
-	readonly auth;
-	readonly oauth;
-	readonly users;
-	readonly me;
-	readonly posts;
-	readonly conversations;
-	readonly notifications;
-	readonly achievements;
-	readonly reports;
-	readonly appeals;
-	readonly admin;
-	readonly platform;
+	readonly auth: AuthApiInterface;
+	readonly oauth: OAuthApiInterface;
+	readonly users: UsersApiInterface;
+	readonly me: UsersMeApiInterface;
+	readonly posts: PostsApiInterface;
+	readonly conversations: ConversationsApiInterface;
+	readonly notifications: NotificationsApiInterface;
+	readonly achievements: AchievementsApiInterface;
+	readonly reports: ModerationReportsApiInterface;
+	readonly appeals: ModerationAppealsApiInterface;
+	readonly admin: ModerationAdminApiInterface;
+	readonly platform: PlatformApiInterface;
 
 	private readonly transport;
 	private readonly options: ClientOptions;

@@ -6,13 +6,46 @@ import type {
 	ReportResolveInput,
 } from "../types";
 
+export interface ModerationReportsApiInterface {
+	list: <T = unknown>() => Promise<T>;
+	create: <T = unknown>(input: ReportCreateInput) => Promise<T>;
+	resolve: <T = unknown>(
+		reportId: string,
+		input: ReportResolveInput,
+	) => Promise<T>;
+}
+
+export interface ModerationAppealsApiInterface {
+	list: <T = unknown>() => Promise<T>;
+	create: <T = unknown>(input: AppealCreateInput) => Promise<T>;
+	resolve: <T = unknown>(
+		appealId: string,
+		input: AppealResolveInput,
+	) => Promise<T>;
+}
+
+export interface ModerationAdminApiInterface {
+	disableUser: <T = unknown>(
+		userId: string,
+		input?: Record<string, unknown>,
+	) => Promise<T>;
+}
+
+export interface ModerationApiInterface {
+	reports: ModerationReportsApiInterface;
+	appeals: ModerationAppealsApiInterface;
+	admin: ModerationAdminApiInterface;
+}
+
 /**
  * Builds moderation helper methods for the Fake Social SDK.
  *
  * @param transport - Transport instance used for moderation requests.
  * @returns Moderation helper methods.
  */
-export function createModerationApi(transport: TransportLike) {
+export function createModerationApi(
+	transport: TransportLike,
+): ModerationApiInterface {
 	return {
 		reports: {
 			/**

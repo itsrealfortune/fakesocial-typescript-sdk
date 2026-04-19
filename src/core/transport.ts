@@ -2,6 +2,7 @@ import type { BodyInit, HeadersInit } from "bun";
 import { FakeMediaApiError } from "../errors";
 import type {
 	ApiErrorPayload,
+	ApiResponse,
 	ClientOptions,
 	QueryParams,
 	RequestOptions,
@@ -34,32 +35,32 @@ export interface TransportLike {
 		method: HttpMethod,
 		path: string,
 		options?: RequestOptions,
-	): Promise<T>;
+	): ApiResponse<T>;
 
 	get<T = unknown>(
 		path: string,
 		options?: Omit<RequestOptions, "body">,
-	): Promise<T>;
+	): ApiResponse<T>;
 
 	post<T = unknown>(
 		path: string,
 		body?: unknown,
 		options?: Omit<RequestOptions, "body">,
-	): Promise<T>;
+	): ApiResponse<T>;
 
 	put<T = unknown>(
 		path: string,
 		body?: unknown,
 		options?: Omit<RequestOptions, "body">,
-	): Promise<T>;
+	): ApiResponse<T>;
 
 	patch<T = unknown>(
 		path: string,
 		body?: unknown,
 		options?: Omit<RequestOptions, "body">,
-	): Promise<T>;
+	): ApiResponse<T>;
 
-	delete<T = unknown>(path: string, options?: RequestOptions): Promise<T>;
+	delete<T = unknown>(path: string, options?: RequestOptions): ApiResponse<T>;
 
 	/**
 	 * Updates the authorization token stored in the transport.

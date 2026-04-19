@@ -35,6 +35,11 @@ export type QueryValue =
 export type QueryParams = Record<string, QueryValue>;
 
 /**
+ * Standard shape for API responses returned by the Fake Social SDK.
+ */
+export type ApiResponse<T = unknown> = Promise<T>;
+
+/**
  * Client configuration when constructing the Fake Media SDK.
  */
 export interface ClientOptions {

@@ -1,4 +1,4 @@
-import { createPostWatcher } from "../core/postWatcher";
+import { createPostWatcher, type PostWatcher } from "../core/postWatcher";
 import type { TransportLike } from "../core/transport";
 import type {
 	AvatarUrlInput,
@@ -13,13 +13,79 @@ import type {
 	QueryParams,
 } from "../types";
 
+export interface PostCommentsApiInterface {
+	list: <T = unknown>(postId: string, query?: QueryParams) => Promise<T>;
+	create: <T = unknown>(
+		postId: string,
+		input: CommentCreateInput,
+	) => Promise<T>;
+	delete: <T = unknown>(postId: string, commentId: string) => Promise<T>;
+}
+
+export interface PostsApiInterface {
+	list: <T = unknown>(query?: QueryParams) => Promise<T>;
+	create: <T = unknown>(input: PostCreateInput) => Promise<T>;
+	delete: <T = unknown>(postId: string) => Promise<T>;
+	like: <T = unknown>(postId: string) => Promise<T>;
+	repost: <T = unknown>(postId: string, input?: PostRepostInput) => Promise<T>;
+	vote: <T = unknown>(postId: string, input: PostVoteInput) => Promise<T>;
+	comments: PostCommentsApiInterface;
+}
+
+export interface ConversationMessagesApiInterface {
+	list: <T = unknown>(conversationId: string) => Promise<T>;
+	send: <T = unknown>(
+		conversationId: string,
+		input: MessageCreateInput,
+	) => Promise<T>;
+	delete: <T = unknown>(
+		conversationId: string,
+		messageId: string,
+	) => Promise<T>;
+}
+
+export interface ConversationsApiInterface {
+	list: <T = unknown>() => Promise<T>;
+	create: <T = unknown>(input: ConversationCreateInput) => Promise<T>;
+	delete: <T = unknown>(conversationId: string) => Promise<T>;
+	messages: ConversationMessagesApiInterface;
+	read: <T = unknown>(conversationId: string) => Promise<T>;
+}
+
+export interface NotificationsApiInterface {
+	list: <T = unknown>() => Promise<T>;
+	markAllRead: <T = unknown>() => Promise<T>;
+}
+
+export interface AchievementsApiInterface {
+	list: <T = unknown>(userId: string) => Promise<T>;
+	definitions: <T = unknown>() => Promise<T>;
+}
+
+export interface PlatformApiInterface {
+	stats: <T = unknown>() => Promise<T>;
+	trending: <T = unknown>(query?: PaginationParams & QueryParams) => Promise<T>;
+	avatarUrl: (input: AvatarUrlInput) => string;
+}
+
+export interface ContentApiInterface {
+	posts: PostsApiInterface;
+	watch: (options?: PostWatcherOptions) => PostWatcher;
+	conversations: ConversationsApiInterface;
+	notifications: NotificationsApiInterface;
+	achievements: AchievementsApiInterface;
+	platform: PlatformApiInterface;
+}
+
 /**
  * Builds the content API helpers for the Fake Social SDK.
  *
  * @param transport - Transport instance used for content-related requests.
  * @returns Content helper methods for posts, conversations, notifications, and more.
  */
-export function createContentApi(transport: TransportLike) {
+export function createContentApi(
+	transport: TransportLike,
+): ContentApiInterface {
 	return {
 		posts: {
 			/**
