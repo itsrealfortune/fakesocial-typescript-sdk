@@ -1,3 +1,9 @@
+/**
+ * API route constants used by authentication-related SDK helpers.
+ *
+ * @example
+ * const url = AuthRoute.Login;
+ */
 export enum AuthRoute {
   Login = "/api/auth/login",
   Signup = "/api/auth/signup",
@@ -16,6 +22,12 @@ export enum AuthRoute {
   PasskeyRemove = "/api/auth/passkey/remove",
 }
 
+/**
+ * API route constants used by OAuth-related SDK helpers.
+ *
+ * @example
+ * const url = OAuthRoute.Authorize;
+ */
 export enum OAuthRoute {
   Token = "/api/oauth/token",
   Revoke = "/api/oauth/revoke",

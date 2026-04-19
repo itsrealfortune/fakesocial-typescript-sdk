@@ -1,9 +1,19 @@
 import type { PostItem, PostWatcherOptions } from "../types";
 import type { TransportLike } from "./transport";
 
+/**
+ * Event names emitted by the PostWatcher.
+ */
 export type PostWatcherEvent = "new-posts";
+
+/**
+ * Listener callback invoked when new posts are detected.
+ */
 export type PostWatcherListener = (posts: PostItem[]) => void;
 
+/**
+ * Periodically polls the posts endpoint and emits events when new items appear.
+ */
 export class PostWatcher {
   private readonly transport: TransportLike;
   private readonly query?: Record<string, unknown>;
@@ -19,6 +29,10 @@ export class PostWatcher {
   private running = false;
   private firstPollCompleted = false;
 
+  /**
+   * @param transport - Transport instance used to fetch posts.
+   * @param options - Polling and filtering options.
+   */
   constructor(transport: TransportLike, options: PostWatcherOptions = {}) {
     this.transport = transport;
     this.query = options.query;
@@ -27,12 +41,18 @@ export class PostWatcher {
     this.emitInitial = options.initialFetch ?? false;
   }
 
+  /**
+   * Registers a listener for watcher events.
+   */
   on(event: PostWatcherEvent, listener: PostWatcherListener): void {
     const listeners = this.listeners.get(event) ?? new Set();
     listeners.add(listener);
     this.listeners.set(event, listeners);
   }
 
+  /**
+   * Removes a previously registered listener.
+   */
   off(event: PostWatcherEvent, listener: PostWatcherListener): void {
     const listeners = this.listeners.get(event);
     if (!listeners) {
@@ -44,6 +64,9 @@ export class PostWatcher {
     }
   }
 
+  /**
+   * Starts polling the posts endpoint.
+   */
   start(): void {
     if (this.running) {
       return;
@@ -53,6 +76,9 @@ export class PostWatcher {
     this.poll().catch(() => undefined);
   }
 
+  /**
+   * Stops polling and clears any pending timer.
+   */
   stop(): void {
     this.running = false;
     if (this.timer !== null) {
@@ -61,9 +87,12 @@ export class PostWatcher {
     }
   }
 
+  /**
+   * Performs a polling cycle and emits events for newly discovered posts.
+   */
   async poll(): Promise<void> {
     const query = { ...this.query, limit: this.limit };
-    const posts = await this.transport.get<PostItem[]>("/api/posts", { query });
+    const posts = await this.transport.get<PostItem[]>('/api/posts', { query });
 
     if (!Array.isArray(posts)) {
       this.scheduleNext();
@@ -142,6 +171,13 @@ export class PostWatcher {
   }
 }
 
+/**
+ * Creates a PostWatcher using the provided transport instance.
+ *
+ * @param transport - The transport implementation used for fetching posts.
+ * @param options - Optional watcher configuration.
+ * @returns A ready-to-use PostWatcher.
+ */
 export function createPostWatcher(
   transport: TransportLike,
   options: PostWatcherOptions = {},
